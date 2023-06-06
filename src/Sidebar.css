@@ -1,0 +1,72 @@
+.sidebar {
+  display: flex;
+  flex-direction: row;
+  width: auto;
+  flex: 0.25;
+  height: 100vh;
+  background-color: #202225;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+.avatarborder {
+  border-bottom: 2px solid #434b59;
+  width: 45px;
+  text-align: center;
+}
+
+.discordIcon {
+  padding: 10px;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  background-color: #36393f;
+}
+
+.avatar {
+  cursor: pointer;
+}
+
+.avatars {
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+}
+
+.avatar:hover {
+  color: white;
+  border-radius: 20%;
+  transition: ease-in-out 0.2s;
+  background-color: #40464b;
+}
+
+.addIcon {
+  padding: 12px;
+  border-radius: 50%;
+  color: #3ba55d;
+  cursor: pointer;
+  background-color: #36393f;
+}
+
+.addIcon:hover {
+  color: white;
+  border-radius: 20%;
+  transition: ease-in-out 0.2s;
+  background-color: #3ba55d;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+  gap: 10px;
+}
+
+.exploreIcon {
+  padding: 12px;
+  border-radius: 20%;
+  color: #fff;
+  cursor: pointer;
+  background-color: #3ba55d;
+}

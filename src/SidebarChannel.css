@@ -1,0 +1,123 @@
+.sidebarChannel {
+  margin-left: 20px;
+  width: 240px;
+  background-color: #2f3136;
+  height: 100vh;
+  color: #fff;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.searchChannel {
+  background-color: #202225;
+  color: #72767d;
+  border: none;
+  margin-top: 10px;
+  outline: none;
+  border-radius: 5px;
+  padding: 10px;
+  width: 220px;
+  box-sizing: border-box;
+  height: 28px;
+}
+
+.line {
+  width: 240px;
+  height: 1px;
+  background-color: #232527;
+}
+
+.friends {
+  width: 224px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  padding: 18px;
+  gap: 10px;
+  border-radius: 5px;
+  background-color: #393c43;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.friends span {
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  padding-left: 8px;
+}
+
+.nitro {
+  width: 224px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  padding: 18px;
+  margin-top: 5px;
+  gap: 10px;
+  border-radius: 5px;
+  color: #8e9297;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.nitro span {
+  font-size: 16px;
+  /* font-weight: 300; */
+  letter-spacing: 0.5px;
+  padding-left: 8px;
+}
+
+.direct_message {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+.light_heading {
+  width: 224px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-transform: uppercase;
+  padding: 10px;
+  gap: 10px;
+  font-weight: 700;
+  color: #8e9297;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.light_heading span {
+  color: #fff;
+}
+.user {
+  margin-top: -15px;
+}
+.profile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px;
+  box-sizing: border-box;
+  margin: 15px 0px;
+  height: 42px;
+}
+
+.username {
+  margin-left: 15px;
+  padding: 40px 0px;
+  font-size: 14px;
+  font-weight: 800;
+  display: flex;
+  flex-direction: column;
+  color: #8e9297;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.username .status {
+  font-size: 6px;
+  display: flex;
+}
