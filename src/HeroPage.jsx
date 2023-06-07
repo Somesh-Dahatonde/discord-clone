@@ -1,54 +1,21 @@
 import React from "react";
-import "./SidebarChannel.css";
-import SpeedIcon from "@mui/icons-material/Speed";
-import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
-import AddIcon from "@mui/icons-material/Add";
-import { Avatar } from "@mui/material";
+import "./HeroPage.css";
+import Header from "./Header";
 import SubjectIcon from "@mui/icons-material/Subject";
-import MicIcon from "@mui/icons-material/Mic";
-import HeadphonesIcon from "@mui/icons-material/Headphones";
-import SettingsIcon from "@mui/icons-material/Settings";
+import { Avatar } from "@mui/material";
 
-// import HeroPage from "./HeroPage";
-import Chat from "./Chat";
-
-function SidebarChannel() {
-  const handleClick = () => {
-    // Handle the click event here
-    console.log("AddIcon clicked!");
-  };
+function HeroPage() {
   return (
     <>
-      <div className="sidebar_content ">
-        <div className="sidebarChannel">
-          <input
-            type="text"
-            placeholder="Find or start a conversation"
-            className="searchChannel"
-          />
-          <span className="horizontal_line"></span>
-          <div>
-            <div className="friends">
-              <PersonAddAlt1Icon />
-              <span>Friends</span>
-            </div>
-            <div className="nitro">
-              <SpeedIcon />
-              <span>Nitro</span>
-            </div>
-          </div>
-          <div className="direct_message">
-            <div className="light_heading">
-              Direct Messages
-              <span>
-                {/* {onclick(() => {
-                <AddIcon />;
-               // console.log("clicked");
-              })} */}
-                <AddIcon onClick={handleClick} />
-              </span>
-            </div>
+      <div className="chat">
+        <Header />
 
+        <div className="flex flex-row">
+          <div className="flex flex-col online_user_list">
+            <div>
+              <h1>ONLINE — 6</h1>
+            </div>
+            <div className="horizontal_line"></div>
             <div className="user">
               <div className="profile">
                 <div className="profile_avatar">
@@ -61,14 +28,14 @@ function SidebarChannel() {
                 <div className="username">
                   Somesh
                   <span className="status">
-                    Listening to Spotify{" "}
+                    Listening to Spotify
                     <span>
                       <SubjectIcon />
                     </span>
                   </span>
                 </div>
               </div>
-
+              <div className="horizontal_line"></div>
               <div className="profile">
                 <div className="profile_avatar">
                   <Avatar
@@ -82,7 +49,7 @@ function SidebarChannel() {
                   <span className="status"></span>
                 </div>
               </div>
-
+              <div className="horizontal_line"></div>
               <div className="profile">
                 <div className="profile_avatar">
                   <Avatar
@@ -101,7 +68,7 @@ function SidebarChannel() {
                   </span>
                 </div>
               </div>
-
+              <div className="horizontal_line"></div>
               <div className="profile">
                 <div className="profile_avatar">
                   <Avatar
@@ -120,7 +87,7 @@ function SidebarChannel() {
                   </span>
                 </div>
               </div>
-
+              <div className="horizontal_line"></div>
               <div className="profile">
                 <div className="profile_avatar">
                   <Avatar
@@ -134,35 +101,50 @@ function SidebarChannel() {
                   <span className="status"></span>
                 </div>
               </div>
+              <div className="horizontal_line"></div>
             </div>
           </div>
-          <div className="user_info">
-            <div className="user_info_avatar ">
-              <Avatar
-                alt="Cindy Baker"
-                src="/static/images/avatar/1.jpg"
-                sx={{ width: 32, height: 32 }}
-              />
-              <span color="success" className="online_status"></span>
-            </div>
-            <div className="username">
-              Cindy
-              <span className="status">#2232</span>
-            </div>
-            <div className="btm_icons">
-              <MicIcon sx={{ width: 22, height: 22 }} />
-              <HeadphonesIcon sx={{ width: 22, height: 22 }} />
-              <SettingsIcon sx={{ width: 22, height: 22 }} />
+          <div className="vertical_line"></div>
+          <div className="active_now">
+            <p>Active Now</p>
+            <div className="flex flex-col active_user_list">
+              <div>
+                <div className=" profile profile_active_user">
+                  <div className="profile_avatar ">
+                    <Avatar
+                      alt="Cindy Baker"
+                      src="/static/images/avatar/1.jpg"
+                      sx={{ width: 32, height: 32 }}
+                    />
+                    <span color="success" className="online_status"></span>
+                  </div>
+                  <div className="username">
+                    Cindy
+                    <span className="status">Streaming Minecraft 3hr</span>
+                  </div>
+                </div>
+
+                <div className=" profile profile_active_user">
+                  <div className="profile_avatar ">
+                    <Avatar
+                      alt="Dairy Baker"
+                      src="/static/images/avatar/1.jpg"
+                      sx={{ width: 32, height: 32 }}
+                    />
+                    <span color="success" className="online_status"></span>
+                  </div>
+                  <div className="username">
+                    Dairy
+                    <span className="status">GTA 2hr</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div>
-          {/* <HeroPage /> */}
-          <Chat />
         </div>
       </div>
     </>
   );
 }
 
-export default SidebarChannel;
+export default HeroPage;

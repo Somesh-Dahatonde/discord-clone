@@ -1,0 +1,88 @@
+.chat {
+  background-color: #36393f;
+  width: 77.3vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.online_user_list {
+  width: 60%;
+  margin: 20px;
+  margin-top: 25px;
+}
+
+.online_user_list .horizontal_line {
+  height: 1px;
+  width: 100%;
+  background-color: #42454a;
+}
+
+.online_user_list div h1 {
+  color: #b9bbbe;
+  font-size: 14px;
+  padding-left: 10px;
+}
+
+.online_user_list .profile .username {
+  font-weight: 800;
+  color: #fff;
+  font-size: 16px;
+}
+
+.online_user_list .profile .username .status {
+  color: #b9bbbe;
+  font-size: 10px;
+  font-weight: 200;
+}
+
+.vertical_line {
+  width: 1px;
+  height: 90vh;
+  background-color: #42454a;
+}
+
+.active_now {
+  margin: 25px;
+}
+
+.active_now p {
+  color: #fff;
+  font-size: 22px;
+  font-weight: 800;
+  padding-left: 10px;
+}
+
+.profile_active_user {
+  background-color: #2f3136;
+  padding: 20px;
+  border-radius: 5px;
+  width: 323px;
+  height: 70px;
+  /* box-sizing: border-box; */
+  box-shadow: 0 2px 0 #2f3136;
+  border: 1px solid #2f3136;
+}
+
+.profile_active_user:hover {
+  /* box-sizing: border-box; */
+  /* box-shadow: 0 2px 0; */
+  box-shadow: 0 3px 10px #323743;
+  border: 1px solid #323743;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.profile_avatar {
+  position: relative;
+}
+.online_status {
+  width: 12px;
+  height: 12px;
+  z-index: 99999;
+  background-color: #43b581;
+  /* position: absolute; */
+  border-radius: 50%;
+  position: absolute;
+  bottom: 0;
+  left: 70%;
+  border: 1px solid #2f3136;
+}

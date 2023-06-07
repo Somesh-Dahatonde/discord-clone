@@ -1,0 +1,126 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 49px;
+  background-color: #36393f;
+  padding: 20px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #232527;
+}
+
+.header_leftside {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.header_friends_btn {
+  width: 87px;
+  height: 22px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  color: #72767d;
+  justify-content: space-between;
+}
+
+.header_friends_btn span {
+  /* font-weight: 700; */
+  color: #fff;
+  letter-spacing: 1px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.header .line {
+  width: 1.5px;
+  height: 24px;
+  background-color: #42454a;
+  margin: 0 10px;
+}
+
+.header_search {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  box-sizing: border-box;
+}
+
+.online_btn {
+  width: 60px;
+  height: 24px;
+  color: #fff;
+  background-color: #3e4249;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.header_search div {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding: 0px 8px;
+  box-sizing: border-box;
+}
+
+.online_friends span {
+  color: #fff;
+  cursor: pointer;
+  box-sizing: border-box;
+  font-weight: 200;
+  padding: 0px 2px;
+  font-size: 14px;
+}
+
+.online_friends span:hover {
+  /* color: #b9bbbe; */
+  background-color: #42454a;
+  border-radius: 3px;
+  transition: 0.2s ease-in-out;
+}
+
+.button {
+  background-color: #3ba55d;
+  height: 24px;
+  padding: 0px 5px;
+  text-align: center;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.header_rightside {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header_rightside_icons {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: row;
+  color: #72767d;
+  margin-left: 20px;
+}
+
+.header_rightside_icons div:hover {
+  color: #fff;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+.header .HelpIcon {
+  padding: 0px 10px;
+}
+
+.header .horizontal_line {
+  width: 1.5px;
+  height: 24px;
+  background-color: #42454a;
+  margin: 0 10px;
+}
