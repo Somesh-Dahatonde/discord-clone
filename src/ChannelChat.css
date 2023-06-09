@@ -3,8 +3,6 @@
   flex-direction: row;
   border-radius: 10px;
   align-items: center;
-  /* width: 100]vw; */
-  margin-left: 2px;
   background-color: #36393f;
 }
 
@@ -18,19 +16,6 @@
   flex-direction: column;
   gap: 10px;
   box-sizing: border-box;
-}
-
-.Channel_chat_header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 49px;
-  padding: 20px;
-  box-sizing: border-box;
-
-  font-size: 14px;
-  cursor: pointer;
-  border-bottom: 1px solid #202225;
 }
 
 .Channels_group {
@@ -95,19 +80,16 @@
   padding-top: 20px;
 }
 
-.username {
-  margin-left: 15px;
-  padding: 40px 0px;
+.online_user_list_username .username {
   font-size: 14px;
   font-weight: 800;
   display: flex;
   flex-direction: column;
   color: #8e9297;
-  justify-content: center;
   align-items: flex-start;
 }
 
-.username .status,
+.online_user_list_username .username .status,
 span {
   font-size: 10px;
   display: flex;
@@ -158,6 +140,7 @@ span {
   background-color: #36393f;
   width: 77.4vw;
   height: 100vh;
+  flex-grow: 1 -1;
   display: flex;
   flex-direction: column;
 }
@@ -171,6 +154,7 @@ span {
   box-sizing: border-box;
   font-size: 14px;
   cursor: pointer;
+  padding: 0px 20px 0px 20px;
   border-bottom: 1px solid #202225;
 }
 
@@ -212,7 +196,6 @@ span {
   outline: none;
   border-radius: 5px;
   padding: 10px;
-  width: 220px;
   box-sizing: border-box;
   height: 28px;
 }
@@ -231,20 +214,19 @@ span {
   transform: translateY(-50%);
   right: 0%;
   z-index: 999;
-  /* color: #36393f; */
 }
 
 .Channel_chat_body {
   display: flex;
   flex-direction: row;
   gap: 10px;
-  overflow-y: scroll;
+  overflow-y: hidden;
   box-sizing: border-box;
 }
 
-.Channel_chat_body::-webkit-scrollbar {
+/* .Channel_chat_body::-webkit-scrollbar {
   width: 5px;
-}
+} */
 
 .User_Info_avatar span {
   width: 70px;
@@ -264,7 +246,7 @@ span {
 }
 
 .Channel_chat_body .groupuser_list {
-  width: 20vw;
+  /* width: 20vw; */
   height: 20vh;
   padding: 20px;
   box-sizing: border-box;
@@ -275,12 +257,20 @@ span {
   color: #8e9297;
 }
 
+.online_user_lists {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* padding: 10px; */
+  box-sizing: border-box;
+  margin-top: 20px;
+}
+
 .online_user_list_avatar {
   height: 40px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  margin-top: 20px;
+  /* margin-top: 20px; */
   position: relative;
 }
 
@@ -295,7 +285,7 @@ span {
   padding: 0;
 }
 .online_user_list_username :nth-child(2) {
-  padding-left: 12px;
+  padding-left: 14px;
 }
 
 .no_off_user_offline {

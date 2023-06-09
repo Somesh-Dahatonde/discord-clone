@@ -145,60 +145,6 @@ function ChannelChat() {
                     amet at aliquam odit, eveniet nulla voluptates facere
                     possimus asperiores nam. Possimus, facilis nobis.
                   </p>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Tempora necessitatibus vero, accusamus id ipsa enim cumque,
-                    amet at aliquam odit, eveniet nulla voluptates facere
-                    possimus asperiores nam. Possimus, facilis nobis.
-                  </p>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Tempora necessitatibus vero, accusamus id ipsa enim cumque,
-                    amet at aliquam odit, eveniet nulla voluptates facere
-                    possimus asperiores nam. Possimus, facilis nobis.
-                  </p>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Tempora necessitatibus vero, accusamus id ipsa enim cumque,
-                    amet at aliquam odit, eveniet nulla voluptates facere
-                    possimus asperiores nam. Possimus, facilis nobis.
-                  </p>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Tempora necessitatibus vero, accusamus id ipsa enim cumque,
-                    amet at aliquam odit, eveniet nulla voluptates facere
-                    possimus asperiores nam. Possimus, facilis nobis.
-                  </p>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Tempora necessitatibus vero, accusamus id ipsa enim cumque,
-                    amet at aliquam odit, eveniet nulla voluptates facere
-                    possimus asperiores nam. Possimus, facilis nobis.
-                  </p>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Tempora necessitatibus vero, accusamus id ipsa enim cumque,
-                    amet at aliquam odit, eveniet nulla voluptates facere
-                    possimus asperiores nam. Possimus, facilis nobis.
-                  </p>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Tempora necessitatibus vero, accusamus id ipsa enim cumque,
-                    amet at aliquam odit, eveniet nulla voluptates facere
-                    possimus asperiores nam. Possimus, facilis nobis.
-                  </p>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Tempora necessitatibus vero, accusamus id ipsa enim cumque,
-                    amet at aliquam odit, eveniet nulla voluptates facere
-                    possimus asperiores nam. Possimus, facilis nobis.
-                  </p>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Tempora necessitatibus vero, accusamus id ipsa enim cumque,
-                    amet at aliquam odit, eveniet nulla voluptates facere
-                    possimus asperiores nam. Possimus, facilis nobis.
-                  </p>
                 </div>
                 <div className="message_input">
                   <div className="input_icon">
@@ -222,7 +168,7 @@ function ChannelChat() {
               <div className="groupuser_list ">
                 <div className="groupuser_list_header">
                   <div className="no_off_user">ONLINE - 1</div>
-                  <div className="online_user_list">
+                  <div className="online_user_lists">
                     <div className="online_user_list_avatar">
                       <Avatar
                         alt="Cindy Baker"
@@ -236,7 +182,7 @@ function ChannelChat() {
                       </div>
                     </div>
                   </div>
-                  <div className="online_user_list">
+                  <div className="online_user_lists">
                     <div className="online_user_list_avatar">
                       <Avatar
                         alt="Remy Sharp"
@@ -252,22 +198,21 @@ function ChannelChat() {
                   </div>
 
                   <div className="no_off_user_offline">Offline - 2</div>
-                  <div className="online_user_list">
+                  <div className="online_user_lists">
                     <div className="online_user_list_avatar">
                       <Avatar
                         alt="Cindy Baker"
                         src="/static/images/avatar/1.jpg"
                         sx={{ width: 32, height: 32 }}
                       />
-                      <span className="online_status"></span>
+
                       <div className="online_user_list_username">
                         <span className="username">Cindy Baker</span>
-                        <span>Playing visual studio code </span>
                       </div>
                     </div>
                   </div>
-                  <div className="online_user_list">
-                    <div className="online_user_list_avatar">
+                  <div className="online_user_lists">
+                    {/* <div className="online_user_list_avatar">
                       <Avatar
                         alt="Remy Sharp"
                         src="/static/images/avatar/1.jpg"
@@ -278,7 +223,7 @@ function ChannelChat() {
                         <span className="username">Remy Sharp</span>
                         <span>Playing visual studio code </span>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>

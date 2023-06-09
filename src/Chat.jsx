@@ -84,7 +84,7 @@ function Chat() {
         <div className="message_body">
           <div className="message_body_chat">
             <div className="User_info_header">
-              <div className="User_Info_avatar">
+              <div className="user_Info_avatar">
                 <Avatar
                   sx={{ bgcolor: deepOrange[500], width: 76, height: 76 }}
                   className="avatar"

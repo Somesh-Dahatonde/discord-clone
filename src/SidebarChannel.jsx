@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./SidebarChannel.css";
 import SpeedIcon from "@mui/icons-material/Speed";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
@@ -9,10 +9,23 @@ import MicIcon from "@mui/icons-material/Mic";
 import HeadphonesIcon from "@mui/icons-material/Headphones";
 import SettingsIcon from "@mui/icons-material/Settings";
 
-// import HeroPage from "./HeroPage";
+import HeroPage from "./HeroPage";
 import Chat from "./Chat";
 
 function SidebarChannel() {
+  const [userClicked, setUserClicked] = useState(false);
+  const [isheroopen, setIsheroopen] = useState(true);
+
+  function addfrd() {
+    setIsheroopen(true);
+    setUserClicked(false);
+  }
+
+  function userWithIds() {
+    setUserClicked(true);
+    setIsheroopen(false);
+  }
+
   const handleClick = () => {
     // Handle the click event here
     console.log("AddIcon clicked!");
@@ -28,7 +41,7 @@ function SidebarChannel() {
           />
           <span className="horizontal_line"></span>
           <div>
-            <div className="friends">
+            <div className="friends" onClick={addfrd}>
               <PersonAddAlt1Icon />
               <span>Friends</span>
             </div>
@@ -50,7 +63,7 @@ function SidebarChannel() {
             </div>
 
             <div className="user">
-              <div className="profile">
+              <div className="profile" id="profile_id" onClick={userWithIds}>
                 <div className="profile_avatar">
                   <Avatar
                     alt="Remy Sharp"
@@ -157,8 +170,8 @@ function SidebarChannel() {
           </div>
         </div>
         <div>
-          {/* <HeroPage /> */}
-          <Chat />
+          {(isheroopen && <HeroPage />) ||
+            (userClicked && setUserClicked && <Chat />)}
         </div>
       </div>
     </>
