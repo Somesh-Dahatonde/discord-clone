@@ -177,42 +177,6 @@ function Chat() {
                 aliquam odit, eveniet nulla voluptates facere possimus
                 asperiores nam. Possimus, facilis nobis.
               </p>
-              {/* <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora
-                necessitatibus vero, accusamus id ipsa enim cumque, amet at
-                aliquam odit, eveniet nulla voluptates facere possimus
-                asperiores nam. Possimus, facilis nobis.
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora
-                necessitatibus vero, accusamus id ipsa enim cumque, amet at
-                aliquam odit, eveniet nulla voluptates facere possimus
-                asperiores nam. Possimus, facilis nobis.
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora
-                necessitatibus vero, accusamus id ipsa enim cumque, amet at
-                aliquam odit, eveniet nulla voluptates facere possimus
-                asperiores nam. Possimus, facilis nobis.
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora
-                necessitatibus vero, accusamus id ipsa enim cumque, amet at
-                aliquam odit, eveniet nulla voluptates facere possimus
-                asperiores nam. Possimus, facilis nobis.
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora
-                necessitatibus vero, accusamus id ipsa enim cumque, amet at
-                aliquam odit, eveniet nulla voluptates facere possimus
-                asperiores nam. Possimus, facilis nobis.
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora
-                necessitatibus vero, accusamus id ipsa enim cumque, amet at
-                aliquam odit, eveniet nulla voluptates facere possimus
-                asperiores nam. Possimus, facilis nobis.
-              </p> */}
             </div>
             <div className="message_input">
               <div className="input_icon">

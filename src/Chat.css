@@ -107,10 +107,6 @@
   box-sizing: border-box;
 }
 
-/* .message_body_chat::-webkit-scrollbar {
-  width: 10px;
-  height: 100vh;
-} */
 .message_body {
   display: flex;
   flex-direction: row;
@@ -135,6 +131,7 @@
   justify-content: space-evenly;
   margin-left: 10px;
   height: 275px;
+  /* gap: 10px; */
 }
 
 .custom_message {
@@ -154,7 +151,6 @@
 .common_server_text {
   font-size: 14px;
   color: #8e9297;
-  /* font-weight: 500; */
   text-align: center;
 }
 .btn_group {

@@ -5,7 +5,8 @@ import "./Sidebar.css";
 import AddIcon from "@mui/icons-material/Add";
 import { deepOrange, deepPurple } from "@mui/material/colors";
 import ExploreIcon from "@mui/icons-material/Explore";
-import SidebarChannel from "./SidebarChannel";
+// import SidebarChannel from "./SidebarChannel";
+import ChannelChat from "./ChannelChat";
 
 function Sidebar() {
   // const avatarArray = [];
@@ -58,7 +59,8 @@ function Sidebar() {
           <ExploreIcon className="exploreIcon" />
         </div>
         <div>
-          <SidebarChannel />
+          {/* <SidebarChannel /> */}
+          <ChannelChat />
         </div>
       </div>
     </>
