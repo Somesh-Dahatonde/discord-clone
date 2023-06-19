@@ -8,7 +8,7 @@ import HelpIcon from "@mui/icons-material/Help";
 
 export const Header = () => {
   const [count, setCount] = React.useState(1);
-  console.log(setCount);
+  // console.log(setCount);
   return (
     <>
       <div className="header">

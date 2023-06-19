@@ -1,13 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Avatar } from "@mui/material";
 import "./Sidebar.css";
 import AddIcon from "@mui/icons-material/Add";
-import { deepOrange, deepPurple } from "@mui/material/colors";
+import { deepPurple } from "@mui/material/colors";
 import ExploreIcon from "@mui/icons-material/Explore";
 import SidebarChannel from "./SidebarChannel";
 import ChannelChat from "./ChannelChat";
+import { useSelector } from "react-redux";
+import { selectUser } from "./features/userSlice";
+import db from "./Firebase";
 
 function Sidebar() {
+  const user = useSelector(selectUser);
+
+  // console.log(`user form sidebar ${JSON.stringify(user)}`);
+
   // i want to show the dm page when i click on the discord icon but not using the display none property by using the react state
   const [isDMOpen, setIsDMOpen] = useState(true);
   const [isChannelClick, setIsChannelClick] = useState(false);
@@ -20,6 +27,27 @@ function Sidebar() {
     setIsChannelClick(true);
     setIsDMOpen(false);
   };
+
+  const createNewChannel = () => {
+    console.log("newchannel registration is stop for now");
+  };
+
+  useEffect(() => {
+    const userdetails = db.collection("Channels");
+    userdetails.get().then((querySnapshot) => {
+      const channelIds = [];
+      querySnapshot.forEach((doc) => {
+        // console.log(`${doc.id}`);
+        channelIds.push(doc.id);
+      });
+      setChannels(channelIds); // Update the state using the correct syntax
+    });
+  }, []);
+
+  const [channels, setChannels] = useState([]);
+
+  console.log(`channels are ${channels[1]}`);
+
   return (
     <>
       <div className="sidebar">
@@ -40,9 +68,9 @@ function Sidebar() {
               ></path>
             </svg>
           </div>
+          {/* all channel avatar are here  */}
           <span className="avatarborder"></span>
           <div className="channel_icons_list">
-            <Avatar className="avatar">N</Avatar>
             <Avatar
               sx={{ bgcolor: deepPurple[500] }}
               className="avatar"
@@ -50,24 +78,21 @@ function Sidebar() {
             >
               OP
             </Avatar>
-            <Avatar sx={{ bgcolor: deepOrange[500] }} className="avatar">
-              N
-            </Avatar>
-            <Avatar className="avatar">OP</Avatar>
-            <Avatar sx={{ bgcolor: deepOrange[500] }} className="avatar">
-              N
-            </Avatar>
-            <Avatar className="avatar">OP</Avatar>
-            <Avatar sx={{ bgcolor: deepOrange[500] }} className="avatar">
-              N
-            </Avatar>
-            <Avatar sx={{ bgcolor: deepPurple[500] }} className="avatar">
-              OP
-            </Avatar>
+            {channels.map((channel) => (
+              <Avatar
+                key={channel}
+                // sx={{ bgcolor: deepPurple[500] }}
+                className="avatar"
+                alt={channel}
+                // onClick={showChannel}/
+              >
+                {channel[0]}
+              </Avatar>
+            ))}
             <AddIcon
               className="addIcon"
               id="add_more_channel"
-              // onClick={handleClick}
+              onClick={createNewChannel}
             />
             <ExploreIcon
               className="exploreIcon"
@@ -87,3 +112,22 @@ function Sidebar() {
 }
 
 export default Sidebar;
+
+// Avatar for demo use
+
+{
+  /* <Avatar sx={{ bgcolor: deepOrange[500] }} className="avatar">
+              N
+            </Avatar>
+            <Avatar className="avatar">OP</Avatar>
+            <Avatar sx={{ bgcolor: deepOrange[500] }} className="avatar">
+              N
+            </Avatar>
+            <Avatar className="avatar">OP</Avatar>
+            <Avatar sx={{ bgcolor: deepOrange[500] }} className="avatar">
+              N
+            </Avatar>
+            <Avatar sx={{ bgcolor: deepPurple[500] }} className="avatar">
+              OP
+            </Avatar> */
+}

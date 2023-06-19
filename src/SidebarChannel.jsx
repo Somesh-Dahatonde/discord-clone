@@ -8,11 +8,14 @@ import SubjectIcon from "@mui/icons-material/Subject";
 import MicIcon from "@mui/icons-material/Mic";
 import HeadphonesIcon from "@mui/icons-material/Headphones";
 import SettingsIcon from "@mui/icons-material/Settings";
-
+import { selectUser } from "./features/userSlice";
+import { useSelector } from "react-redux";
 import HeroPage from "./HeroPage";
 import Chat from "./Chat";
 
 function SidebarChannel() {
+  const user = useSelector(selectUser);
+
   const [userClicked, setUserClicked] = useState(false);
   const [isheroopen, setIsheroopen] = useState(true);
 
@@ -81,8 +84,43 @@ function SidebarChannel() {
                   </span>
                 </div>
               </div>
+            </div>
+          </div>
+          <div className="user_info">
+            <div className="user_info_avatar ">
+              <Avatar
+                alt="Cindy Baker"
+                src={user.photo}
+                sx={{ width: 32, height: 32 }}
+              />
+              <span color="success" className="online_status"></span>
+            </div>
+            <div className="username">
+              {user.displayName}
+              <span className="status">#{user.uid.substring(0, 4)}</span>
+            </div>
+            <div className="btm_icons">
+              <MicIcon sx={{ width: 22, height: 22 }} />
+              <HeadphonesIcon sx={{ width: 22, height: 22 }} />
+              <SettingsIcon sx={{ width: 22, height: 22 }} />
+            </div>
+          </div>
+        </div>
+        <div>
+          {(isheroopen && <HeroPage />) ||
+            (userClicked && setUserClicked && <Chat />)}
+        </div>
+      </div>
+    </>
+  );
+}
 
-              <div className="profile">
+export default SidebarChannel;
+
+// user profiles
+
+{
+  /* <div className="profile">
                 <div className="profile_avatar">
                   <Avatar
                     alt="Trevor Henderson"
@@ -146,36 +184,5 @@ function SidebarChannel() {
                   Travis
                   <span className="status"></span>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div className="user_info">
-            <div className="user_info_avatar ">
-              <Avatar
-                alt="Cindy Baker"
-                src="/static/images/avatar/1.jpg"
-                sx={{ width: 32, height: 32 }}
-              />
-              <span color="success" className="online_status"></span>
-            </div>
-            <div className="username">
-              Cindy
-              <span className="status">#2232</span>
-            </div>
-            <div className="btm_icons">
-              <MicIcon sx={{ width: 22, height: 22 }} />
-              <HeadphonesIcon sx={{ width: 22, height: 22 }} />
-              <SettingsIcon sx={{ width: 22, height: 22 }} />
-            </div>
-          </div>
-        </div>
-        <div>
-          {(isheroopen && <HeroPage />) ||
-            (userClicked && setUserClicked && <Chat />)}
-        </div>
-      </div>
-    </>
-  );
+              </div>*/
 }
-
-export default SidebarChannel;

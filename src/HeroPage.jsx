@@ -3,8 +3,11 @@ import "./HeroPage.css";
 import Header from "./Header";
 import SubjectIcon from "@mui/icons-material/Subject";
 import { Avatar } from "@mui/material";
+import { selectUser } from "./features/userSlice";
+import { useSelector } from "react-redux";
 
 function HeroPage() {
+  const user = useSelector(selectUser);
   return (
     <>
       <div className="chat">
@@ -20,13 +23,13 @@ function HeroPage() {
               <div className="profile">
                 <div className="profile_avatar">
                   <Avatar
-                    alt="Remy Sharp"
-                    src="/static/images/avatar/1.jpg"
+                    alt={user.displayName}
+                    src={user.photo}
                     sx={{ width: 32, height: 32 }}
                   />
                 </div>
                 <div className="username">
-                  Somesh
+                  {user.displayName}
                   <span className="status">
                     Listening to Spotify
                     <span>
@@ -36,7 +39,57 @@ function HeroPage() {
                 </div>
               </div>
               <div className="horizontal_line"></div>
-              <div className="profile">
+            </div>
+          </div>
+          <div className="vertical_line"></div>
+          <div className="active_now">
+            <p>Active Now</p>
+            <div className="flex flex-col active_user_list">
+              <div>
+                <div className=" profile profile_active_user">
+                  <div className="profile_avatar ">
+                    <Avatar
+                      alt="Cindy Baker"
+                      src="/static/images/avatar/1.jpg"
+                      sx={{ width: 32, height: 32 }}
+                    />
+                    <span color="success" className="online_status"></span>
+                  </div>
+                  <div className="username">
+                    Cindy
+                    <span className="status">Streaming Minecraft 3hr</span>
+                  </div>
+                </div>
+
+                <div className=" profile profile_active_user">
+                  <div className="profile_avatar ">
+                    <Avatar
+                      alt="Dairy Baker"
+                      src="/static/images/avatar/1.jpg"
+                      sx={{ width: 32, height: 32 }}
+                    />
+                    <span color="success" className="online_status"></span>
+                  </div>
+                  <div className="username">
+                    Dairy
+                    <span className="status">GTA 2hr</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default HeroPage;
+
+// online user list
+
+{
+  /* <div className="profile">
                 <div className="profile_avatar">
                   <Avatar
                     alt="Trevor Henderson"
@@ -101,50 +154,5 @@ function HeroPage() {
                   <span className="status"></span>
                 </div>
               </div>
-              <div className="horizontal_line"></div>
-            </div>
-          </div>
-          <div className="vertical_line"></div>
-          <div className="active_now">
-            <p>Active Now</p>
-            <div className="flex flex-col active_user_list">
-              <div>
-                <div className=" profile profile_active_user">
-                  <div className="profile_avatar ">
-                    <Avatar
-                      alt="Cindy Baker"
-                      src="/static/images/avatar/1.jpg"
-                      sx={{ width: 32, height: 32 }}
-                    />
-                    <span color="success" className="online_status"></span>
-                  </div>
-                  <div className="username">
-                    Cindy
-                    <span className="status">Streaming Minecraft 3hr</span>
-                  </div>
-                </div>
-
-                <div className=" profile profile_active_user">
-                  <div className="profile_avatar ">
-                    <Avatar
-                      alt="Dairy Baker"
-                      src="/static/images/avatar/1.jpg"
-                      sx={{ width: 32, height: 32 }}
-                    />
-                    <span color="success" className="online_status"></span>
-                  </div>
-                  <div className="username">
-                    Dairy
-                    <span className="status">GTA 2hr</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
+              <div className="horizontal_line"></div> */
 }
-
-export default HeroPage;

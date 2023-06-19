@@ -20,8 +20,36 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
 import GifBoxIcon from "@mui/icons-material/GifBox";
 import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
+import { useSelector } from "react-redux";
+import { selectUser } from "./features/userSlice";
+import { useState, useEffect } from "react";
+import db from "./Firebase";
 
 function ChannelChat() {
+  const user = useSelector(selectUser);
+
+  useEffect(() => {
+    db.collection("channels").onSnapshot((snapshot) =>
+      setChannels(
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+          channel: doc.data(),
+        }))
+      )
+    );
+  }, []);
+
+  const handleAddChannel = () => {
+    const channelName = prompt("Enter a new channel name");
+
+    if (channelName) {
+      db.collection("channels").add({
+        channelName: channelName,
+      });
+    }
+  };
+
+  const [channels, setChannels] = useState([]);
   return (
     <>
       <div className="Channel_chat_contener">
@@ -39,20 +67,23 @@ function ChannelChat() {
                   {/* ChevronRightOutlinedIcon */}
                   Text Channels
                 </p>
-                <AddRoundedIcon />
+                <AddRoundedIcon onClick={handleAddChannel} />
               </div>
               <div className="text_channel_name">
                 <span className="sidebar_channellist_hash">#</span>
                 <span>general</span>
               </div>
-              <div className="text_channel_name">
-                <span className="sidebar_channellist_hash">#</span>
-                <span>web-app</span>
-              </div>
-              <div className="text_channel_name">
-                <span className="sidebar_channellist_hash">#</span>
-                <span>documentation </span>
-              </div>
+              {channels.map((channel) => (
+                <div
+                  className="text_channel_name"
+                  key={channel.id}
+                  id={channel.id}
+                  channelName={channel.channel.channelName}
+                >
+                  <span className="sidebar_channellist_hash">#</span>
+                  <span>{channel.channel.channelName}</span>
+                </div>
+              ))}
             </div>
             <div className="Channels_group_name voice">
               <div className="channel_list_header">
@@ -76,15 +107,16 @@ function ChannelChat() {
           <div className="user_info">
             <div className="user_info_avatar ">
               <Avatar
-                alt="Cindy Baker"
-                src="/static/images/avatar/1.jpg"
+                alt={user.displayName}
+                src={user.photo}
                 sx={{ width: 32, height: 32 }}
               />
               <span color="success" className="online_status"></span>
             </div>
             <div className="username">
-              Cindy
-              <span className="status">#2232</span>
+              <div className="username_atbottom">{user.displayName}</div>
+
+              <span className="status">#{user.uid.substring(0, 4)}</span>
             </div>
             <div className="btm_icons">
               <MicIcon sx={{ width: 22, height: 22 }} />
@@ -171,18 +203,18 @@ function ChannelChat() {
                   <div className="online_user_lists">
                     <div className="online_user_list_avatar">
                       <Avatar
-                        alt="Cindy Baker"
-                        src="/static/images/avatar/1.jpg"
+                        alt={user.displayName}
+                        src={user.photo}
                         sx={{ width: 32, height: 32 }}
                       />
                       <span className="online_status"></span>
                       <div className="online_user_list_username">
-                        <span className="username">Cindy_Baker</span>
+                        <span className="username">{user.displayName}</span>
                         <span>Playing visual studio code </span>
                       </div>
                     </div>
                   </div>
-                  <div className="online_user_lists">
+                  {/* <div className="online_user_lists">
                     <div className="online_user_list_avatar">
                       <Avatar
                         alt="Remy Sharp"
@@ -195,7 +227,7 @@ function ChannelChat() {
                         <span>Playing visual studio code </span>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
 
                   <div className="no_off_user_offline">Offline - 2</div>
                   <div className="online_user_lists">
@@ -236,3 +268,16 @@ function ChannelChat() {
 }
 
 export default ChannelChat;
+
+//  demo text channel
+
+{
+  /* <div className="text_channel_name">
+                <span className="sidebar_channellist_hash">#</span>
+                <span>web-app</span>
+              </div>
+              <div className="text_channel_name">
+                <span className="sidebar_channellist_hash">#</span>
+                <span>documentation </span>
+              </div> */
+}
