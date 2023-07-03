@@ -73,7 +73,6 @@
 
 .sidebar_channellist_hash {
   font-size: 18px;
-  /* padding: 8px; */
 }
 
 .voice {
@@ -169,7 +168,6 @@ span {
   gap: 4px;
   color: #8e9297;
   text-align: center;
-  /* letter-spacing: 1px; */
 }
 
 .channel_username span {
@@ -228,9 +226,6 @@ span {
   box-sizing: border-box;
 }
 
-/* .Channel_chat_body::-webkit-scrollbar {
-  width: 5px;
-} */
 
 .User_Info_avatar span {
   width: 70px;
