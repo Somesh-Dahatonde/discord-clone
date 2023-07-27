@@ -9,44 +9,70 @@ import ChannelChat from "./ChannelChat";
 import { useSelector } from "react-redux";
 import { selectUser } from "./features/userSlice";
 import db from "./Firebase";
+import firebase from "firebase/compat/app";
 
 function Sidebar() {
   const user = useSelector(selectUser);
-
-  // console.log(`user form sidebar ${JSON.stringify(user)}`);
-
-  // i want to show the dm page when i click on the discord icon but not using the display none property by using the react state
+  const [channels, setChannels] = useState([]);
+  const [data2, setData2] = useState([]);
   const [isDMOpen, setIsDMOpen] = useState(true);
   const [isChannelClick, setIsChannelClick] = useState(false);
+
   const showDm = () => {
     setIsDMOpen(true);
     setIsChannelClick(false);
   };
 
-  const showChannel = () => {
-    setIsChannelClick(true);
-    setIsDMOpen(false);
-  };
-
-  const createNewChannel = () => {
-    console.log("newchannel registration is stop for now");
-  };
-
   useEffect(() => {
-    const userdetails = db.collection("Channels");
-    userdetails.get().then((querySnapshot) => {
-      const channelIds = [];
-      querySnapshot.forEach((doc) => {
-        // console.log(`${doc.id}`);
-        channelIds.push(doc.id);
-      });
-      setChannels(channelIds); // Update the state using the correct syntax
+    const userdetails = db.collection("Servers").doc("aEWeqT8cP7FJcCjRiBV2");
+    userdetails.get().then((docSnapshot) => {
+      if (docSnapshot.exists) {
+        const data = docSnapshot.data();
+        // console.log(data.serverCollections[0]);   // this is the way to access the data from the array of objects
+        setData2(data.serverCollections);
+        // const channelIds = Object.keys(data);
+        setChannels(data.serverCollections);
+      }
     });
   }, []);
 
-  const [channels, setChannels] = useState([]);
+  const showChannel = (channel) => {
+    setIsChannelClick(true);
+    setIsDMOpen(false);
+    // data2.map((server) => {
+    //   console.log(
+    //     `servername: ${server.serverName} channel: ${server.channelName.channelName}`
+    //   );
+    // });
+    console.log(channel);
+  };
 
-  console.log(`channels are ${channels[1]}`);
+  const createNewChannel = () => {
+    const serverName = prompt("Enter a new server name:");
+
+    if (serverName) {
+      const serverDocRef = db.collection("Servers").doc("aEWeqT8cP7FJcCjRiBV2");
+      serverDocRef
+        .update({
+          serverCollections: firebase.firestore.FieldValue.arrayUnion({
+            serverName: serverName,
+            channelCreator: user.displayName,
+            creatorUserId: user.email,
+            channelName: {
+              channelName: "general",
+            },
+          }),
+        })
+        .then(() => {
+          console.log("Channel created successfully!");
+        })
+        .catch((error) => {
+          console.error("Error creating channel:", error);
+        });
+    } else {
+      alert("Channel name can't be empty");
+    }
+  };
 
   return (
     <>
@@ -80,13 +106,13 @@ function Sidebar() {
             </Avatar>
             {channels.map((channel) => (
               <Avatar
-                key={channel}
-                // sx={{ bgcolor: deepPurple[500] }}
+                key={channel.serverName}
                 className="avatar"
-                alt={channel}
-                // onClick={showChannel}/
+                alt={channel.serverName}
+                onClick={() => showChannel(channel.serverName)}
+                style={{ backgroundColor: deepPurple[500] }}
               >
-                {channel[0]}
+                {channel.serverName[0]}
               </Avatar>
             ))}
             <AddIcon
@@ -94,17 +120,15 @@ function Sidebar() {
               id="add_more_channel"
               onClick={createNewChannel}
             />
-            <ExploreIcon
-              className="exploreIcon"
-              id="explore_more"
-              // onClick={handleClick}
-            />
+            <ExploreIcon className="exploreIcon" id="explore_more" />
           </div>
         </div>
         <div>
           {/* <HeroPage id="hero_page" /> */}
           {(isDMOpen && <SidebarChannel id="dm_userslist" />) ||
-            (isChannelClick && <ChannelChat id="channel_chat" />)}
+            (isChannelClick && (
+              <ChannelChat id="channel_chat" props={channels} />
+            ))}
         </div>
       </div>
     </>
@@ -112,22 +136,3 @@ function Sidebar() {
 }
 
 export default Sidebar;
-
-// Avatar for demo use
-
-{
-  /* <Avatar sx={{ bgcolor: deepOrange[500] }} className="avatar">
-              N
-            </Avatar>
-            <Avatar className="avatar">OP</Avatar>
-            <Avatar sx={{ bgcolor: deepOrange[500] }} className="avatar">
-              N
-            </Avatar>
-            <Avatar className="avatar">OP</Avatar>
-            <Avatar sx={{ bgcolor: deepOrange[500] }} className="avatar">
-              N
-            </Avatar>
-            <Avatar sx={{ bgcolor: deepPurple[500] }} className="avatar">
-              OP
-            </Avatar> */
-}

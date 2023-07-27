@@ -1,11 +1,9 @@
 import React from "react";
 import "./Chat.css";
 import "./ChannelChat.css";
-
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import VolumeUpRoundedIcon from "@mui/icons-material/VolumeUpRounded";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
-// import ChevronRightOutlinedIcon from "@mui/icons-material/ChevronRightOutlined";
 import MicIcon from "@mui/icons-material/Mic";
 import HeadphonesIcon from "@mui/icons-material/Headphones";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -25,9 +23,9 @@ import { selectUser } from "./features/userSlice";
 import { useState, useEffect } from "react";
 import db from "./Firebase";
 
-function ChannelChat() {
+function ChannelChat(channeldata) {
   const user = useSelector(selectUser);
-
+  const [channels, setChannels] = useState([]);
   useEffect(() => {
     db.collection("channels").onSnapshot((snapshot) =>
       setChannels(
@@ -37,11 +35,11 @@ function ChannelChat() {
         }))
       )
     );
+    console.log(channeldata);
   }, []);
 
   const handleAddChannel = () => {
     const channelName = prompt("Enter a new channel name");
-
     if (channelName) {
       db.collection("channels").add({
         channelName: channelName,
@@ -49,7 +47,6 @@ function ChannelChat() {
     }
   };
 
-  const [channels, setChannels] = useState([]);
   return (
     <>
       <div className="Channel_chat_contener">
