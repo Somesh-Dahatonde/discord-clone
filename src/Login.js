@@ -1,13 +1,19 @@
 import { Button } from "@mui/material";
 import { auth, provider } from "./Firebase";
+import { signInWithPopup } from "firebase/auth"; // Correct import
 import React from "react";
 import "./Login.css";
 
 function Login() {
   const signIn = () => {
-    // Google Login
     alert("DO NOT ENTER IN ANY PERSONAL INFORMATION! This is NOT DISCORD!");
-    auth.signInWithPopup(provider).catch((error) => alert(error.message));
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        console.log("User signed in:", user);
+        // Handle user information (e.g., store in state or context)
+      })
+      .catch((error) => alert(error.message));
   };
 
   return (

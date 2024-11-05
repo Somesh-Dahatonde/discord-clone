@@ -8,53 +8,51 @@ import SidebarChannel from "./SidebarChannel";
 import ChannelChat from "./ChannelChat";
 import { useSelector } from "react-redux";
 import { selectUser } from "./features/userSlice";
-import db from "./Firebase";
-import firebase from "firebase/compat/app";
+import { db } from "./Firebase";
+
+import {
+  collection,
+  getDocs,
+  arrayUnion,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
 
 function Sidebar() {
   const user = useSelector(selectUser);
   const [channels, setChannels] = useState([]);
-  const [data2, setData2] = useState([]);
+  const [data, setData] = useState([]);
   const [isDMOpen, setIsDMOpen] = useState(true);
   const [isChannelClick, setIsChannelClick] = useState(false);
+  const [selectedChannel, setSelectedChannel] = useState(null);
 
   const showDm = () => {
     setIsDMOpen(true);
     setIsChannelClick(false);
   };
 
-  useEffect(() => {
-    const userdetails = db.collection("Servers").doc("aEWeqT8cP7FJcCjRiBV2");
-    userdetails.get().then((docSnapshot) => {
-      if (docSnapshot.exists) {
-        const data = docSnapshot.data();
-        // console.log(data.serverCollections[0]);   // this is the way to access the data from the array of objects
-        setData2(data.serverCollections);
-        // const channelIds = Object.keys(data);
-        setChannels(data.serverCollections);
-      }
-    });
-  }, []);
-
-  const showChannel = (channel) => {
-    setIsChannelClick(true);
-    setIsDMOpen(false);
-    // data2.map((server) => {
-    //   console.log(
-    //     `servername: ${server.serverName} channel: ${server.channelName.channelName}`
-    //   );
-    // });
-    console.log(channel);
+  console.log("dataa ", data);
+  const fetchChannels = async () => {
+    try {
+      const userDetails = collection(db, "Servers");
+      const querySnapshot = await getDocs(userDetails);
+      const serverData = querySnapshot.docs.map((doc) => doc.data());
+      setData(serverData);
+      setChannels(serverData[0].serverCollections);
+    } catch (error) {
+      console.error("Error fetching server data:", error);
+    }
   };
 
-  const createNewChannel = () => {
+  const createNewChannel = async () => {
     const serverName = prompt("Enter a new server name:");
 
     if (serverName) {
-      const serverDocRef = db.collection("Servers").doc("aEWeqT8cP7FJcCjRiBV2");
-      serverDocRef
-        .update({
-          serverCollections: firebase.firestore.FieldValue.arrayUnion({
+      const serverDocRef = doc(db, "Servers", "aEWeqT8cP7FJcCjRiBV2");
+
+      try {
+        await updateDoc(serverDocRef, {
+          serverCollections: arrayUnion({
             serverName: serverName,
             channelCreator: user.displayName,
             creatorUserId: user.email,
@@ -62,16 +60,26 @@ function Sidebar() {
               channelName: "general",
             },
           }),
-        })
-        .then(() => {
-          console.log("Channel created successfully!");
-        })
-        .catch((error) => {
-          console.error("Error creating channel:", error);
         });
+        console.log("Channel created successfully!");
+        fetchChannels(); // Fetch updated channels after creating a new channel
+      } catch (error) {
+        console.error("Error creating channel:", error);
+      }
     } else {
       alert("Channel name can't be empty");
     }
+  };
+
+  useEffect(() => {
+    fetchChannels(); // Fetch channels on component mount
+  }, []);
+
+  const showChannel = (channel) => {
+    setIsChannelClick(true);
+    setSelectedChannel(channel);
+    setIsDMOpen(false);
+    console.log(channel, "channel");
   };
 
   return (
@@ -100,16 +108,25 @@ function Sidebar() {
             <Avatar
               sx={{ bgcolor: deepPurple[500] }}
               className="avatar"
-              onClick={showChannel}
+              onClick={() =>
+                showChannel({
+                  channelName: {
+                    channelName: "general",
+                  },
+                  serverName: "test",
+                  channelCreator: "test channel",
+                  creatorUserId: "sddahatonde22@gmail.com",
+                })
+              }
             >
               OP
             </Avatar>
-            {channels.map((channel) => (
+            {channels?.map((channel) => (
               <Avatar
                 key={channel.serverName}
                 className="avatar"
                 alt={channel.serverName}
-                onClick={() => showChannel(channel.serverName)}
+                onClick={() => showChannel(channel)}
                 style={{ backgroundColor: deepPurple[500] }}
               >
                 {channel.serverName[0]}
@@ -127,7 +144,7 @@ function Sidebar() {
           {/* <HeroPage id="hero_page" /> */}
           {(isDMOpen && <SidebarChannel id="dm_userslist" />) ||
             (isChannelClick && (
-              <ChannelChat id="channel_chat" props={channels} />
+              <ChannelChat id="channel_chat" channel={selectedChannel} />
             ))}
         </div>
       </div>

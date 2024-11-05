@@ -1,5 +1,5 @@
 import React from "react";
-import "./Header.css";
+import "./header.css";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import Badge from "@mui/material/Badge";
 import MarkChatUnreadRoundedIcon from "@mui/icons-material/MarkChatUnreadRounded";

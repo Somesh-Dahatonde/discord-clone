@@ -5,6 +5,7 @@
   display: flex;
   flex-direction: column;
 }
+
 .messgage_header {
   display: flex;
   flex-direction: row;
@@ -46,12 +47,14 @@
   left: 75%;
   border: 1px solid #2f3136;
 }
+
 .message_header_right {
   display: flex;
   align-items: center;
   flex-direction: row;
   justify-content: center;
 }
+
 .message_header_right_icons {
   display: flex;
   align-items: center;
@@ -119,12 +122,14 @@
   font-weight: 800;
   color: #fff;
 }
+
 .username_withid {
   font-size: 20px;
   font-weight: 400;
   color: #fff;
   letter-spacing: 1px;
 }
+
 .User_Info_avatar {
   display: flex;
   flex-direction: column;
@@ -148,11 +153,13 @@
   justify-content: space-between;
   width: 60%;
 }
+
 .common_server_text {
   font-size: 14px;
   color: #8e9297;
   text-align: center;
 }
+
 .btn_group {
   display: flex;
   flex-direction: row;
@@ -341,6 +348,7 @@
   height: 1px;
   background-color: #2f3136;
 }
+
 .message_body_right_content .username_user_info {
   font-size: 18px;
   font-weight: 400;

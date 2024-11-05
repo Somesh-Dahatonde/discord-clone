@@ -30,6 +30,7 @@
   padding: 0px 20px 0px 0px;
   box-sizing: border-box;
 }
+
 .text_channel_name {
   display: flex;
   align-items: center;
@@ -40,6 +41,7 @@
   font-weight: 500;
   color: #8e9297;
   opacity: 0.8;
+  cursor: pointer;
 }
 
 .voice_channel_name {
@@ -94,6 +96,7 @@ span {
   display: flex;
   font-weight: 300;
 }
+
 .user_info {
   position: absolute;
   bottom: 0;
@@ -107,9 +110,11 @@ span {
   padding: 10px;
   box-sizing: border-box;
 }
+
 .user_info_avatar {
   position: relative;
 }
+
 .user_info .online_status {
   position: absolute;
   bottom: 0;
@@ -120,6 +125,7 @@ span {
   color: #fff;
   font-size: 12px;
 }
+
 .user_info .username .status {
   font-size: 10px;
   color: #c7c9cb;
@@ -179,6 +185,7 @@ span {
   font-size: 16px;
   font-weight: 500;
 }
+
 .channel_chat_header_icons_group {
   display: flex;
   align-items: center;
@@ -276,9 +283,11 @@ span {
   height: 10px;
   left: 10%;
 }
+
 .online_user_list_username .username {
   padding: 0;
 }
+
 .online_user_list_username :nth-child(2) {
   padding-left: 14px;
 }

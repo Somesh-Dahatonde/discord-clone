@@ -21,53 +21,40 @@ import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
 import { useSelector } from "react-redux";
 import { selectUser } from "./features/userSlice";
 import { db } from "./Firebase";
-import {
-  collection,
-  onSnapshot,
-  addDoc,
-  query,
-  where,
-} from "firebase/firestore";
+import { collection, onSnapshot, addDoc } from "firebase/firestore";
 
 function ChannelChat({ channel }) {
   const user = useSelector(selectUser);
   const [channels, setChannels] = useState([]);
   const [messages, setMessages] = useState([]);
-  const [input, setInput] = useState("");
 
+  console.log(channel, "channel form channelchant");
+
+  // Fetch channels from Firestore
   useEffect(() => {
     const channelCollection = collection(db, "channels");
 
-    // Create a query to fetch channels for a specific server
-    const serverQuery = query(
-      channelCollection,
-      where("serverName", "==", channel.serverName)
-    );
-
-    const unsubscribe = onSnapshot(serverQuery, (snapshot) => {
+    const unsubscribe = onSnapshot(channelCollection, (snapshot) => {
       setChannels(
         snapshot.docs.map((doc) => ({
-          uniqueKey: `${doc.data().serverName}-${
-            doc.data().channelName.channelName
-          }`,
+          id: doc.id,
           ...doc.data(), // Use spread operator to get channel data
         }))
       );
     });
 
     return () => unsubscribe();
-  }, [channel.serverName]); // Add server name dependency to re-fetch on change
+  }, []);
 
+  // Fetch messages for the selected channel
   useEffect(() => {
-    if (channel && channel.serverName && channel.channelName.channelName) {
+    if (channel) {
       const messagesCollection = collection(
         db,
         "channels",
-        `${channel.serverName}-${channel.channelName.channelName}`, // Construct path using serverName and channelName
+        channel.channelName.channelName,
         "messages"
       );
-
-      console.log(messagesCollection, "sdfa");
       const unsubscribe = onSnapshot(messagesCollection, (snapshot) => {
         setMessages(
           snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
@@ -75,8 +62,6 @@ function ChannelChat({ channel }) {
       });
 
       return () => unsubscribe();
-    } else {
-      console.warn("Channel or channel details are not defined");
     }
   }, [channel]);
 
@@ -88,7 +73,7 @@ function ChannelChat({ channel }) {
         await addDoc(collection(db, "channels"), {
           channelName: { channelName }, // Store as an object
           creatorUserId: user.email, // Use user email for creator ID
-          serverName: channel.serverName, // Use the server name from the current context
+          serverName: channel.serverName, // Replace with actual server name logic
           channelCreator: user.displayName, // Use user's display name
         });
       } catch (error) {
@@ -102,11 +87,10 @@ function ChannelChat({ channel }) {
   // Handle sending a message to the current channel
   const handleSendMessage = async (event) => {
     event.preventDefault();
-    if (messages && channel) {
-      // Ensure channel is defined
-      const channelCollectionPath = `channels/${channel.serverName}-${channel.channelName.channelName}/messages`;
-      await addDoc(collection(db, channelCollectionPath), {
-        text: input,
+    const message = event.target.elements.message.value;
+    if (message) {
+      await addDoc(collection(db, "channels", channel.id, "messages"), {
+        text: message,
         user: user.displayName,
         timestamp: new Date(),
       });
@@ -119,8 +103,8 @@ function ChannelChat({ channel }) {
       <div className="Channel_chat_contener">
         <div className="channel_lists">
           <div className="Channel_chat_header">
-            <span>{channel.serverName}</span>
-            {/* <span>app-quote</span> */}
+            {/* <span>{channelName}</span> */}
+            <span>app-quote</span>
             <ExpandMoreIcon />
           </div>
           <div className="Channels_group">
@@ -240,27 +224,14 @@ function ChannelChat({ channel }) {
                     amet at aliquam odit, eveniet nulla voluptates facere
                     possimus asperiores nam. Possimus, facilis nobis.
                   </p>
-
-                  {messages.length > 0 && messages ? (
-                    messages.map((message) => (
-                      <p key={message.id}>{message.text}</p>
-                    ))
-                  ) : (
-                    <div>
-                      <span>no message</span>
-                    </div>
-                  )}
                 </div>
                 <div className="message_input">
                   <div className="input_icon">
-                    <form onSubmit={handleSendMessage}>
-                      <input
-                        type="text"
-                        id="fullWidth"
-                        placeholder="Message"
-                        onChange={(e) => setInput(e.target.value)}
-                      />
-                    </form>
+                    <input
+                      type="text"
+                      id="fullWidth"
+                      placeholder="Messagae @RemySharp"
+                    />
 
                     <div className="input_icons">
                       <AddCircleIcon className="icon input_icon_addIcon" />
@@ -290,6 +261,21 @@ function ChannelChat({ channel }) {
                       </div>
                     </div>
                   </div>
+                  {/* <div className="online_user_lists">
+                    <div className="online_user_list_avatar">
+                      <Avatar
+                        alt="Remy Sharp"
+                        src="/static/images/avatar/1.jpg"
+                        sx={{ width: 32, height: 32 }}
+                      />
+                      <span className="online_status"></span>
+                      <div className="online_user_list_username">
+                        <span className="username">Remy Sharp</span>
+                        <span>Playing visual studio code </span>
+                      </div>
+                    </div>
+                  </div> */}
+
                   <div className="no_off_user_offline">Offline - 2</div>
                   <div className="online_user_lists">
                     <div className="online_user_list_avatar">
@@ -305,7 +291,7 @@ function ChannelChat({ channel }) {
                     </div>
                   </div>
                   <div className="online_user_lists">
-                    <div className="online_user_list_avatar">
+                    {/* <div className="online_user_list_avatar">
                       <Avatar
                         alt="Remy Sharp"
                         src="/static/images/avatar/1.jpg"
@@ -316,7 +302,7 @@ function ChannelChat({ channel }) {
                         <span className="username">Remy Sharp</span>
                         <span>Playing visual studio code </span>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
@@ -329,3 +315,16 @@ function ChannelChat({ channel }) {
 }
 
 export default ChannelChat;
+
+//  demo text channel
+
+{
+  /* <div className="text_channel_name">
+                <span className="sidebar_channellist_hash">#</span>
+                <span>web-app</span>
+              </div>
+              <div className="text_channel_name">
+                <span className="sidebar_channellist_hash">#</span>
+                <span>documentation </span>
+              </div> */
+}
