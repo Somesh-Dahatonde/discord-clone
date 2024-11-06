@@ -1,6 +1,6 @@
-# Getting Started with Create React App and Redux
+# Discord Clone with Create React App and Redux
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+This project is a Discord clone bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template. It uses Firebase for backend services.
 
 ## Available Scripts
 
@@ -37,10 +37,74 @@ If you aren't satisfied with the build tool and configuration choices, you can `
 
 Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However, we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+## Firebase Configuration
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+This project uses Firebase for backend services. Ensure you have your Firebase configuration set up correctly in the `Firebase.js` file.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Setting Up Firebase
+
+1. Go to the [Firebase Console](https://console.firebase.google.com/).
+2. Create a new project or select an existing project.
+3. Add a web app to your project.
+4. Copy the Firebase configuration and replace the placeholder values in your `Firebase.js` file.
+
+Create a `Firebase.js` file in your `src` directory with the following content:
+
+```javascript
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_AUTH_DOMAIN",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_STORAGE_BUCKET",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+// Initialize Firestore
+const db = getFirestore(app);
+
+// Initialize Firebase Authentication
+const auth = getAuth(app);
+
+// Initialize Google Auth Provider
+const provider = new GoogleAuthProvider();
+
+export { db, auth, provider };
+```
+
+## Channel and Message Structure
+
+Channels and messages are stored in Firestore with the following structure:
+
+- Channels:
+
+```json
+{
+  "serverName": "demo",
+  "creatorUserId": "sddahatonde22@gmail.com",
+  "channelName": {
+    "channelName": "general"
+  },
+  "channelCreator": "Somesh Dahatonde"
+}
+```
+
+- Message:
+
+```json
+{
+  "text": "Hello, world!",
+  "user": "Somesh Dahatonde",
+  "timestamp": "2023-10-01T12:34:56Z"
+}
+```

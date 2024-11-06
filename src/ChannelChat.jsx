@@ -34,6 +34,7 @@ function ChannelChat({ channel }) {
   const [channels, setChannels] = useState([]);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
+  const [selectedChannel, setSelectedChannel] = useState(null);
 
   useEffect(() => {
     const channelCollection = collection(db, "channels");
@@ -133,7 +134,12 @@ function ChannelChat({ channel }) {
                 </p>
                 <AddRoundedIcon onClick={handleAddChannel} />
               </div>
-              <div className="text_channel_name">
+              <div
+                className="text_channel_name"
+                onClick={() =>
+                  setSelectedChannel(channel.channelName.channelName)
+                }
+              >
                 <span className="sidebar_channellist_hash">#</span>
                 <span>{channel.channelName.channelName}</span>
               </div>
@@ -142,6 +148,9 @@ function ChannelChat({ channel }) {
                   className="text_channel_name"
                   key={channel.id}
                   id={channel.id}
+                  onClick={() =>
+                    setSelectedChannel(channel.channelName.channelName)
+                  }
                 >
                   <span className="sidebar_channellist_hash">#</span>
                   <span>{channel.channelName.channelName}</span>
@@ -217,11 +226,11 @@ function ChannelChat({ channel }) {
                   <div className="User_Info_avatar">
                     <span> #</span>
                     <h1 className="username_user_info channel_tag">
-                      Welcome to #general!
+                      Welcome to #{selectedChannel}!
                     </h1>
                     {/* <div className="username_withid">RemySharp#2232</div> */}
                     <div className="custom_message">
-                      This is the begining of the #web-app channel.
+                      This is the begining of the #{channel.serverName}.
                     </div>
                   </div>
                   <div className="chat_header_horizontal_line"></div>
